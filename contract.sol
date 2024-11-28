@@ -10,7 +10,7 @@ contract Marketplace {
     }
 
     mapping(uint256 => Item) public items;
-    uint256 private _itemCount; // We keep track of the count but do not expose it
+    uint256 private _itemCount;
 
     // Function to list an item for sale with a name
     function listItem(string calldata name, uint256 price) external {
@@ -24,7 +24,7 @@ contract Marketplace {
             buyer: address(0)
         });
 
-        _itemCount++; // Increment item count
+        _itemCount++; 
     }
 
     // Function to buy an item
@@ -49,17 +49,17 @@ contract Marketplace {
         // If the item is unsold, the seller is the owner
         if (item.buyer == address(0)) {
             if (item.seller == msg.sender) {
-                return ("You (Seller)", item.seller); // If the caller is the seller
+                return ("You (Seller)", item.seller); 
             }
-            return ("Seller", item.seller); // Else, the seller is the owner
+            return ("Seller", item.seller);
         }
 
         // If the item is sold, the buyer is the owner
         if (item.buyer == msg.sender) {
-            return ("You (Buyer)", item.buyer); // If the caller is the buyer
+            return ("You (Buyer)", item.buyer);
         }
 
-        return ("Buyer", item.buyer); // Else, someone else is the buyer
+        return ("Buyer", item.buyer); 
     }
 
     // Function to get all items with their IDs and names
